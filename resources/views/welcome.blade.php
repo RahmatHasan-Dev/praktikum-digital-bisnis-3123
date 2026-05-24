@@ -62,7 +62,7 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            @foreach(($partners ?? []) as $partner)
+            @forelse($partners as $partner)
                 <div class="bg-white rounded-3xl border border-slate-100 shadow-sm p-5 flex items-center justify-center hover:shadow-2xl transition">
                     <div class="flex flex-col items-center gap-3">
                         <img 
@@ -74,11 +74,9 @@
                         <p class="text-center text-sm font-bold text-slate-800 line-clamp-1">{{ $partner->name }}</p>
                     </div>
                 </div>
-            @endforeach
-
-            @if(empty($partners) || $partners->count() === 0)
+            @empty
                 <div class="col-span-full text-center text-slate-500 font-medium py-10">Belum ada partner.</div>
-            @endif
+            @endforelse
         </div>
     </section>
 
