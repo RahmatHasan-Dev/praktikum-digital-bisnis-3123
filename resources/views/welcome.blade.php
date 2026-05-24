@@ -52,6 +52,36 @@
         </div>
     </section>
 
+    {{-- Soal 4: Render data Partner ke halaman publik --}}
+    <section id="partners" class="max-w-7xl mx-auto px-6 py-16">
+        <div class="flex justify-between items-end mb-10 gap-4">
+            <div>
+                <h2 class="text-3xl font-extrabold mb-2">Partner</h2>
+                <p class="text-slate-500 font-medium">Platform AmikomEventHub didukung oleh berbagai partner.</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            @foreach(($partners ?? []) as $partner)
+                <div class="bg-white rounded-3xl border border-slate-100 shadow-sm p-5 flex items-center justify-center hover:shadow-2xl transition">
+                    <div class="flex flex-col items-center gap-3">
+                        <img 
+                            src="{{ $partner->logo_url }}"
+                            alt="{{ $partner->name }}"
+                            class="w-16 h-16 rounded-xl object-contain bg-slate-50 border border-slate-100"
+                            onerror="this.onerror=null;this.src='https://placehold.co/200x200';"
+                        >
+                        <p class="text-center text-sm font-bold text-slate-800 line-clamp-1">{{ $partner->name }}</p>
+                    </div>
+                </div>
+            @endforeach
+
+            @if(empty($partners) || $partners->count() === 0)
+                <div class="col-span-full text-center text-slate-500 font-medium py-10">Belum ada partner.</div>
+            @endif
+        </div>
+    </section>
+
     <section id="events" class="max-w-7xl mx-auto px-6 py-20">
         <div class="flex justify-between items-end mb-12">
             <div>

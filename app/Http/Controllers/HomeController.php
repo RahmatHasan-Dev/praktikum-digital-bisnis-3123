@@ -27,6 +27,9 @@ class HomeController extends Controller
         // 4. Ambil data (batasi biar sesuai "terdekat")
         $events = $query->take(9)->get();
 
-        return view('welcome', compact('events', 'categories'));
+        // 5. Ambil data partner untuk ditampilkan di halaman publik (/)
+        $partners = Partner::query()->orderByDesc('id')->get();
+
+        return view('welcome', compact('events', 'categories', 'partners'));
     }
 }
