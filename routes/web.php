@@ -38,15 +38,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/events', [DashboardController::class, 'indexEvent'])->name('events.index');
     Route::get('/transactions', [DashboardController::class, 'indexTransaction'])->name('transactions.index');
 
-    // Pertemuan 3.5 - Manajemen Kategori (UI saja, belum CRUD database)
-    Route::get('/categories', function () {
-        return view('admin.categories.index');
-    })->name('categories.index');
+    // UTS - CRUD Kategori (Admin)
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
 
-    // Pertemuan 7 - Modul Partner
-    Route::get('/partners', [\App\Http\Controllers\PartnerController::class, 'index'])->name('partners.index');
-    Route::get('/partners/create', [\App\Http\Controllers\PartnerController::class, 'create'])->name('partners.create');
-    Route::post('/partners', [\App\Http\Controllers\PartnerController::class, 'store'])->name('partners.store');
+    // Pertemuan 7 (UTS) - Modul Partner (CRUD lengkap + Search)
+    Route::resource('partners', \App\Http\Controllers\PartnerController::class);
 
     Route::resource('events', EventAdminController::class);
 });
