@@ -1,21 +1,24 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    function show(){
-        return view('event-detail');
+    public function show(\App\Models\Event $event)
+    {
+        // relasi kategori dipakai di view
+        $event->load('category');
+        return view('event-detail', compact('event'));
     }
 
-    function checkout(){
+    public function checkout()
+    {
         return view('checkout');
     }
 
-    function ticket(){
+    public function ticket()
+    {
         return view('ticket');
     }
 }

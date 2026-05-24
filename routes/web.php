@@ -2,27 +2,27 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController as EventAdminController;
-use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Route;
 
 // Rute User Area
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
-Route::get('/checkout', [EventController::class, 'checkout'])->name('checkout');
-Route::get('/my-ticket', [EventController::class, 'ticket'])->name('ticket');
-Route::post('/logout', function () {return redirect('/');})->name('logout');
+Route::get('/event/{event}', [\App\Http\Controllers\EventController::class, 'show'])->name('events.show');
 
-use Illuminate\Support\Facades\Route;
+Route::get('/kategori/{category}', [\App\Http\Controllers\HomeController::class, 'index'])->name('kategoris.index');
+
+Route::get('/checkout', [\App\Http\Controllers\EventController::class, 'checkout'])->name('checkout');
+Route::get('/my-ticket', [\App\Http\Controllers\EventController::class, 'ticket'])->name('ticket');
+
+Route::post('/logout', function () {return redirect('/');})->name('logout');
 
 // Routes halaman statis (Pertemuan 2.5)
 
 Route::get('/profil', function () {
     return view('profil');
-});
+})->name('profil');
 
-Route::get('/katalog', function () {
-    return view('katalog');
-});
+Route::get('/katalog', [\App\Http\Controllers\HomeController::class, 'index'])->name('katalog');
 
 Route::get('/bantuan', function () {
     return view('bantuan');
@@ -30,7 +30,7 @@ Route::get('/bantuan', function () {
 
 Route::get('/kontak', function () {
     return view('contact');
-});
+})->name('kontak');
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
